@@ -1,26 +1,32 @@
-const express = require('express');
-const next = require('next');
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
-const handle = app.getRequestHandler();
+/*
+ * @Description: Description
+ * @Author: 清河
+ * @Date: 2019-08-13 10:50:59
+ * @LastEditTime: 2019-08-13 11:37:31
+ * @LastEditors: 清河
+ */
+const Vue = require('vue')
+const server = require('express')()
+const vueServerRenderer = require('vue-server-renderer');
+const createApp = require('./app')
+server.get('*', (req, res) => {
+  const context = {
+    title: 'hello',
+  }
+  const app = createApp(context);
+  const renderer = vueServerRenderer.createRenderer({
+    template: require('fs').readFileSync('./src/index.template.html', 'utf-8')
+  })
 
-app.prepare()
-    .then(() => {
-        const server = express();
-        server.get('*', (req, res) => {
-            return handle(req, res);
-        });
-        server.get('/p/:id', (req, res) => {
-            const actualPage = '/post';
-            const queryParams = { title: req.params.id };
-            app.render(req, res, actualPage, queryParams);
-        });
-        server.listen(3000, (err) => {
-            if (err) throw err;
-            console.log('> Ready on http://localhost:3000');
-        });
-    })
-    .catch((ex) => {
-        console.error(ex.stack);
-        process.exit(1);
-    });
+  renderer.renderToString(app, (err, html) => {
+    if (err) {
+      console.log(err);
+      res.status(500).end('Internal Server Error')
+      return
+    }
+    res.end(html)
+    console.log(html)
+  })
+})
+
+server.listen(8080)
