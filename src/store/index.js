@@ -1,10 +1,3 @@
-/*
- * @Description: Description
- * @Author: 清河
- * @Date: 2019-08-13 14:19:33
- * @LastEditTime: 2019-08-13 14:19:40
- * @LastEditors: 清河
- */
 import Vue from 'vue'
 import Vuex from 'vuex'
 

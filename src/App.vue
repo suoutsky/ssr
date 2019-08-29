@@ -1,7 +1,21 @@
-<!--
- * @Description: Description
- * @Author: 清河
- * @Date: 2019-08-13 11:32:32
- * @LastEditTime: 2019-08-13 11:36:49
- * @LastEditors: 清河
- -->
+<template>
+  <div id="app">
+     app home
+  </div>
+</template>
+
+<script>
+export default {
+    name: 'App'
+};
+</script>
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  background-color: #f7f7f7;
+}
+</style>

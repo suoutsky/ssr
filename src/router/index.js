@@ -1,10 +1,3 @@
-/*
- * @Description: Description
- * @Author: 清河
- * @Date: 2019-08-13 11:47:32
- * @LastEditTime: 2019-08-13 14:18:13
- * @LastEditors: 清河
- */
 import Vue from 'vue'
 import Router from 'vue-router'
 

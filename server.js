@@ -8,10 +8,10 @@
 const Vue = require('vue')
 const server = require('express')()
 const vueServerRenderer = require('vue-server-renderer');
-const createApp = require('./app')
+const createApp = require('./src/app');
 server.get('*', (req, res) => {
   const context = {
-    title: 'hello',
+    title: 'hello'
   }
   const app = createApp(context);
   const renderer = vueServerRenderer.createRenderer({
