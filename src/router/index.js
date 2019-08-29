@@ -1,18 +1,12 @@
-/*
- * @Description: Description
- * @Author: 清河
- * @Date: 2019-08-13 11:47:32
- * @LastEditTime: 2019-08-13 14:18:13
- * @LastEditors: 清河
- */
 import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
 
 // route-level code splitting
-const Home = () => import('../views/home/index.vue')
-const School = () => import('../views/school/index.vue')
+const createListView = id => () => import('../views/CreateListView').then(m => m.default(id))
+const ItemView = () => import('../views/ItemView.vue')
+const UserView = () => import('../views/UserView.vue')
 
 export function createRouter () {
   return new Router({
@@ -20,9 +14,14 @@ export function createRouter () {
     fallback: false,
     scrollBehavior: () => ({ y: 0 }),
     routes: [
-      { path: '/', redirect: '/Home' },
-      { path: '/home', redirect: '/Home' },
-      { path: '/school', redirect: '/School' }
+      { path: '/top/:page(\\d+)?', component: createListView('top') },
+      { path: '/new/:page(\\d+)?', component: createListView('new') },
+      { path: '/show/:page(\\d+)?', component: createListView('show') },
+      { path: '/ask/:page(\\d+)?', component: createListView('ask') },
+      { path: '/job/:page(\\d+)?', component: createListView('job') },
+      { path: '/item/:id(\\d+)', component: ItemView },
+      { path: '/user/:id', component: UserView },
+      { path: '/', redirect: '/top' }
     ]
   })
 }
